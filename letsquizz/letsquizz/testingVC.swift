@@ -3,7 +3,6 @@ import UIKit
 class testingVC: UIViewController {
     let question = Model()
     
-    
     @IBOutlet weak var questionTitle: UITextView!
     
     @IBOutlet weak var numberOfCurrentQuestion: UILabel!
@@ -12,11 +11,10 @@ class testingVC: UIViewController {
     @IBAction func answer1(_ sender: UIButton) {
         question.answers[question.currentNumberOfQuestion] = answer1Title.text!
         question.answersIndex[question.currentNumberOfQuestion] = 1
-        answer1Title.backgroundColor = UIColor.cyan
+        answer1Title.backgroundColor = UIColor(red:0.00, green:0.70, blue:1.00, alpha:1.0)
         answer2Title.backgroundColor = UIColor.white
         answer3Title.backgroundColor = UIColor.white
         answer4Title.backgroundColor = UIColor.white
-        print("check1! /n")
     }
     
     @IBOutlet weak var answer2Title: UILabel!
@@ -24,10 +22,9 @@ class testingVC: UIViewController {
         question.answers[question.currentNumberOfQuestion] = answer2Title.text!
         question.answersIndex[question.currentNumberOfQuestion] = 2
         answer1Title.backgroundColor = UIColor.white
-        answer2Title.backgroundColor = UIColor.cyan
+        answer2Title.backgroundColor = UIColor(red:0.00, green:0.70, blue:1.00, alpha:1.0)
         answer3Title.backgroundColor = UIColor.white
         answer4Title.backgroundColor = UIColor.white
-        print("check2! /n")
     }
     
     @IBOutlet weak var answer3Title: UILabel!
@@ -36,10 +33,8 @@ class testingVC: UIViewController {
         question.answersIndex[question.currentNumberOfQuestion] = 3
         answer1Title.backgroundColor = UIColor.white
         answer2Title.backgroundColor = UIColor.white
-        answer3Title.backgroundColor = UIColor.cyan
+        answer3Title.backgroundColor = UIColor(red:0.00, green:0.70, blue:1.00, alpha:1.0)
         answer4Title.backgroundColor = UIColor.white
-        print("check3! /n")
-
     }
     
     @IBOutlet weak var answer4Title: UILabel!
@@ -49,14 +44,15 @@ class testingVC: UIViewController {
         answer1Title.backgroundColor = UIColor.white
         answer2Title.backgroundColor = UIColor.white
         answer3Title.backgroundColor = UIColor.white
-        answer4Title.backgroundColor = UIColor.cyan
-        print("check4! /n")
+        answer4Title.backgroundColor = UIColor(red:0.00, green:0.70, blue:1.00, alpha:1.0)
     }
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //self.addBackground()
+        
         question.randomlyOrderedAnswers = question.answerOrderRandomGenerator(Answers: question.questions[question.numberOfAnswered].answers)
         questionTitle.text = question.questions[question.numberOfAnswered].questionTitle
         numberOfCurrentQuestion.text = "Question " + String(question.numberOfAnswered + 1) + "/" + String(question.answers.count)
@@ -77,13 +73,17 @@ class testingVC: UIViewController {
     }
     
     @IBAction func nextQuestion(_ sender: UIButton) {
-        if (question.currentNumberOfQuestion == question.totalQuestionNumber - 1 ||
-            (question.answersIndex[question.currentNumberOfQuestion] == -1)) {
-            let alert = UIAlertController(title: "", message: "Finish test?", preferredStyle: .alert)
-            let backAction = UIAlertAction(title: "Back", style: .default, handler: { _ in
+        if (question.currentNumberOfQuestion == question.totalQuestionNumber - 1
+            /*|| (question.answersIndex[question.currentNumberOfQuestion] == -1)*/) {
+            let alert = UIAlertController(title: "Finish the test", message: "This is the last question", preferredStyle: .alert)
+            let backAction = UIAlertAction(title: "No", style: .default, handler: { _ in
                 // add your 
             })
+            let finishAction = UIAlertAction(title: "Finish", style: .default, handler: { _ in
+                // later
+            })
             alert.addAction(backAction)
+            alert.addAction(finishAction)
             
             self.present(alert, animated: true, completion: nil)
         } else {
@@ -99,7 +99,7 @@ class testingVC: UIViewController {
                 case 2: answer2Title.backgroundColor = UIColor.cyan
                 case 3: answer3Title.backgroundColor = UIColor.cyan
                 case 4: answer4Title.backgroundColor = UIColor.cyan
-                default: print("Error!")
+                default: 0
                 }
             } else {
                 answer1Title.backgroundColor = UIColor.white
@@ -141,7 +141,7 @@ class testingVC: UIViewController {
             case 2: answer2Title.backgroundColor = UIColor.cyan
             case 3: answer3Title.backgroundColor = UIColor.cyan
             case 4: answer4Title.backgroundColor = UIColor.cyan
-            default: print("Error!")
+            default: 0
             }
             
             //        question.randomlyOrderedAnswers = question.answerOrderRandomGenerator(Answers: question.questions[question.currentNumberOfQuestion].answers)
